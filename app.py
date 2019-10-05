@@ -1,10 +1,24 @@
-from flask import Flask, render_template, redirect, url_for, request
-
+from flask import Flask, render_template, redirect, url_for, flash, \
+    request, session
+from functools import wraps
 app = Flask(__name__)
+app.secret_key = "rememberthis"
+
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash('You need to login first.')
+            return redirect(url_for('login'))
+    return wrap
 
 @app.route('/')
+@login_required
 def home():
-    return "Searching for restaurants?"
+    return render_template('index.html')
+    #return "Searching for restaurants?"
 
 @app.route('/welcome')
 def welcome():
@@ -15,11 +29,20 @@ def login():
     error = None
     if (request.method == 'POST'):
         if(request.form['username'] != 'admin' or request.form['password'] != 'admin'):
-            error = 'Invalid'
+            error = 'Invalid credentials.'
         else:
+            session['logged_in'] = True
+            flash('You are logged in now!')
             return redirect(url_for('home'))
-
     return render_template('login.html', error = error)
+
+@app.route('/logout')
+@login_required
+def logout():
+    session.pop('logged_in', None)
+    flash('Sad to see you go!')
+    return redirect(url_for('welcome'))
+
 
 
 if (__name__ == '__main__'):
