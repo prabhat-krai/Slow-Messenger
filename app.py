@@ -1,16 +1,13 @@
 from flask import Flask, render_template, redirect, url_for, flash, \
     request, session, g
-
+import config
 from functools import wraps
 #import sqlite3
 
 from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.secret_key = "rememberthis"
-#app.database = "sample.db"
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
+app.config.from_object(config.Dev)
 db = SQLAlchemy(app)
 
 from models import *
@@ -59,7 +56,7 @@ def logout():
 #   return sqlite3.connect(app.database)
 
 if (__name__ == '__main__'):
-    app.run(debug = True)
+    app.run()
 
 
 
