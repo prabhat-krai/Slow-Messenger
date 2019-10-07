@@ -13,6 +13,12 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 from models import *
 
+from project.users.views import users_blueprint
+
+# register our blueprints
+app.register_blueprint(users_blueprint)
+
+
 def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
@@ -20,7 +26,7 @@ def login_required(f):
             return f(*args, **kwargs)
         else:
             flash('You need to login first.')
-            return redirect(url_for('login'))
+            return redirect(url_for('users.login'))
     return wrap
 
 @app.route('/')
@@ -53,8 +59,6 @@ def logout():
     flash('Sad to see you go!')
     return redirect(url_for('welcome'))
 
-#def connect_db():
-#   return sqlite3.connect(app.database)
 
 if (__name__ == '__main__'):
     app.run()
