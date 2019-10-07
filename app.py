@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, flash, \
     request, session, g
 import config
+from flask_bcrypt import Bcrypt
 from functools import wraps
 #import sqlite3
 
@@ -9,7 +10,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 app.config.from_object(config.Dev)
 db = SQLAlchemy(app)
-
+bcrypt = Bcrypt(app)
 from models import *
 
 def login_required(f):
