@@ -15,4 +15,4 @@ alembic==0.6.6
 coverage==4.0a1
 itsdangerous==0.24
 py-bcrypt==0.4
-wsgiref==0.1.2
+wsgiref>=0.1.2
