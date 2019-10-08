@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash, session, Blueprint
 from functools import wraps
 from project import db
-from project.models import Blogpost
+from models import Blogpost
 
 home_blueprint = Blueprint(
     'home', __name__,
@@ -24,7 +24,6 @@ def login_required(f):
 def home():
     posts = db.session.query(Blogpost).all()
     return render_template('index.html', posts = posts)
-    #return "Searching for restaurants?"
 
 @home_blueprint.route('/welcome')
 def welcome():
