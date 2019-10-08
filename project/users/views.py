@@ -1,5 +1,4 @@
-from flask import flash, redirect, render_template, request, \
-    url_for, Blueprint
+from flask import flash, redirect, render_template, request, url_for, Blueprint
 from flask_login import login_user, login_required, logout_user
 from .forms import LoginForm, RegisterForm
 from models  import User, bcrypt
@@ -22,7 +21,7 @@ def login():
             if (user is not None and bcrypt.check_password_hash(user.password, request.form['password'])):
                 #session['logged_in'] = True
                 login_user(user)
-                flash('You were logged in.')
+                flash( request.form['username'] + ' were logged in.')
                 return redirect(url_for('home.home'))
             else:
                 error = 'Invalid Credentials. Please try again.'

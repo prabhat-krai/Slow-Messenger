@@ -11,9 +11,10 @@ class Blogpost(db.Model):
     description = db.Column(db.String, primary_key = False)
     author_id = db.Column(db.Integer, ForeignKey('users.id'))
 
-    def __init__(self, title, description):
+    def __init__(self, title, description, author_id):
         self.title = title
         self.description = description
+        self.author_id = author_id
 
     def __repr__(self):
         return '<{}>, <{}>'.format(self.title, self.description)
