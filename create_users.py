@@ -1,6 +1,6 @@
 from project import db
 from models import User
-
+from bcrypt import hashpw
 db.create_all()
 
 db.session.add(User("master", "mast@min.com", "password"))
