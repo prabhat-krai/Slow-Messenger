@@ -2,3 +2,6 @@
 __pycache__
 .vscode
 slow
+Procfile
+sql_gae.py
+*.db
