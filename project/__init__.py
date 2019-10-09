@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 import os
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:psql@localhost/slow_msg'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://azlzirukfpmlyz:c8db339a4c85fd31cb055ff1bc7b32704838a224992e100f9c11d4bf8594ecd1@ec2-50-17-233-158.compute-1.amazonaws.com:5432/d70jjn3c34fr41'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager()
