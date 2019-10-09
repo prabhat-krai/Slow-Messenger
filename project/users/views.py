@@ -19,7 +19,6 @@ def login():
         if form.validate_on_submit():
             user = User.query.filter_by(name=request.form['username']).first()
             if (user is not None and bcrypt.check_password_hash(user.password, request.form['password'])):
-                #session['logged_in'] = True
                 login_user(user)
                 flash( request.form['username'] + ' were logged in.')
                 return redirect(url_for('home.home'))
@@ -37,7 +36,7 @@ def logout():
     return redirect(url_for('home.welcome'))
 
 
-@users_blueprint.route('/register', methods=['GET', 'POST'])
+@users_blueprint.route('/register/', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
