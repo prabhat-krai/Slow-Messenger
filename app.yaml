@@ -3,5 +3,5 @@ runtime: python37
 env_variables:
   CLOUD_SQL_CONNECTION_NAME: indigo-lambda-194514:asia-south1:slow-msg
   DB_USER: prabhat
-  DB_PASS: prabhat
+  DB_PASS: -------
   DB_NAME: slow-msg
