@@ -10,6 +10,9 @@
 <h3>Add a Post!</h3>
 <br>
 <form class="form-message" role="form" method="post" action="/">
+  {% for message in get_flashed_messages() %}
+        {{ message }}
+      {% endfor %}
   {{ form.csrf_token }}
   <p>
     {{ form.title(placeholder="title") }}
